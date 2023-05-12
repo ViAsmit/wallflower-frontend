@@ -12,8 +12,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 abstract class BaseApi {
-  final String _baseUrl = '<Your Server URL here>';
-  // final String _baseUrl = '192.168.1.12:3000';
+  // final String _baseUrl = '<Your Server URL here>';
+  final String _baseUrl = '192.168.1.12:5000';
   final String _authToken = Prefs().getToken();
 
 //TODO: need of api for google login
@@ -53,7 +53,7 @@ abstract class BaseApi {
   //GET
   Future<ApiResponse> getRequest(
       {required String endpoint, Map<String, Object>? query}) async {
-    final uri = Uri.https(_baseUrl, endpoint, query);
+    final uri = Uri.http(_baseUrl, endpoint, query);
     if (kDebugMode) {
       print(uri);
     }
@@ -75,13 +75,9 @@ abstract class BaseApi {
   //POST
   Future<ApiResponse> postRequest(
       String endpoint, Map<String, dynamic> data) async {
-    if (kDebugMode) {
-      print("posttttttttttttttttttt");
-    }
     final uri = Uri.http(_baseUrl, endpoint);
-    if (kDebugMode) {
-      print(uri);
-    }
+    print(uri);
+    print(data);
     return processResponse(
       await http.post(uri, body: data),
     );
@@ -137,7 +133,7 @@ abstract class BaseApi {
         String error = 'Error occurred';
         for (var key in data.keys) {
           if (key.contains('error')) {
-            error = data[key][0];
+            error = data[key];
             if (kDebugMode) {
               print(error);
             }

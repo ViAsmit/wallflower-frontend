@@ -1,92 +1,65 @@
-class Users {
-  int? id;
-  String? name;
-  String? username;
+// To parse this JSON data, do
+//
+//     final user = userFromMap(jsonString);
+
+import 'dart:convert';
+
+User userFromMap(str) => User.fromMap(str);
+
+String userToMap(User data) => json.encode(data.toMap());
+
+class User {
+  User({
+    this.id,
+    this.email,
+    this.password,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+    this.gender,
+    this.interest,
+    this.name,
+    this.topics,
+    this.images,
+  });
+
+  String? id;
   String? email;
-  Address? address;
-  String? phone;
-  String? website;
+  String? password;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  int? v;
+  String? gender;
+  String? interest;
+  String? name;
+  List<String>? topics;
+  List<String>? images;
 
-  Users(
-      {this.id,
-      this.name,
-      this.username,
-      this.email,
-      this.address,
-      this.phone,
-      this.website});
+  factory User.fromMap(Map<String, dynamic> json) => User(
+        id: json["_id"],
+        email: json["email"],
+        password: json["password"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+        v: json["__v"],
+        gender: json["gender"],
+        interest: json["interest"],
+        name: json["name"],
+        topics: List<String>.from(json["topics"].map((x) => x)),
+        images: List<String>.from(json["images"].map((x) => x)),
+      );
 
-  Users.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    username = json['username'];
-    email = json['email'];
-    address =
-        json['address'] != null ? Address.fromJson(json['address']) : null;
-    phone = json['phone'];
-    website = json['website'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['username'] = username;
-    data['email'] = email;
-    if (address != null) {
-      data['address'] = address!.toJson();
-    }
-    data['phone'] = phone;
-    data['website'] = website;
-    return data;
-  }
-}
-
-class Address {
-  String? street;
-  String? suite;
-  String? city;
-  String? zipcode;
-  Geo? geo;
-
-  Address({this.street, this.suite, this.city, this.zipcode, this.geo});
-
-  Address.fromJson(Map<String, dynamic> json) {
-    street = json['street'];
-    suite = json['suite'];
-    city = json['city'];
-    zipcode = json['zipcode'];
-    geo = json['geo'] != null ? Geo.fromJson(json['geo']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['street'] = street;
-    data['suite'] = suite;
-    data['city'] = city;
-    data['zipcode'] = zipcode;
-    if (geo != null) {
-      data['geo'] = geo!.toJson();
-    }
-    return data;
-  }
-}
-
-class Geo {
-  String? lat;
-  String? lng;
-
-  Geo({this.lat, this.lng});
-
-  Geo.fromJson(Map<String, dynamic> json) {
-    lat = json['lat'];
-    lng = json['lng'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['lat'] = lat;
-    data['lng'] = lng;
-    return data;
-  }
+  Map<String, dynamic> toMap() => {
+        "_id": id,
+        "email": email,
+        "password": password,
+        "createdAt": createdAt!.toIso8601String(),
+        "updatedAt": updatedAt!.toIso8601String(),
+        "__v": v,
+        "gender": gender,
+        "interest": interest,
+        "name": name,
+        "topics": List<dynamic>.from(topics!.map((x) => x)),
+        "images": List<dynamic>.from(images!.map((x) => x)),
+      };
 }

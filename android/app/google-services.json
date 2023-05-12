@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "613830086557",
+    "project_id": "wallflower-48313",
+    "storage_bucket": "wallflower-48313.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:613830086557:android:c792a7121383a1c7d9a974",
+        "android_client_info": {
+          "package_name": "com.asmit.nitp_social"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "613830086557-3dt2o8gf5vn32hco59nk6taq22d8c1dl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_M9sPmxR9eAa_hfYDcPzDlxXL0PZrnrk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "613830086557-3dt2o8gf5vn32hco59nk6taq22d8c1dl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
